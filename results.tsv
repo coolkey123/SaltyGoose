@@ -1,0 +1,49 @@
+# anchor 列口径：git 仓库填 commit 短 hash；非 git 仓库填备份目录锚点（如 bak-3.0.4-20261018）。
+# ghost-<hash> = 历史上填过但当前目录非 git 仓库、无法 show 复核的锚点（史实保留，不作可回滚凭据）。
+timestamp	anchor	skill	old_score	new_score	status	dimension	note	eval_mode
+2026-10-18T18:58	ghost-6768b18	SaltyGoose	-	83.7	baseline	-	基线评估: dim8 实测 3 prompt(with-skill vs baseline 子agent独立盲测) 全 full_test	full_test
+2026-10-18T19:05	ghost-49e286f	SaltyGoose	83.7	3-0 better	keep	dim8	paired 3 judge 全判 clear better: 禁空转三段式消掉零产出且未放松编造防线, 增益外溢 dim3/dim5/dim9	paired
+2026-10-18T19:12	ghost-2e34c93	SaltyGoose	(after keep)	0-2-1 worse	revert	dim3	三段式表系复述铁律1/4与返工规则, 未新增约束, 反增 dim7 冗余与漂移风险	paired
+2026-10-18T19:20	ghost-0c689cd	SaltyGoose	(after keep)	1-1-1 平票全slight	revert	dim3	2/3 judge 指出「⚠️无完全匹配卡」未在AT表登记, 违反铁律3(AT表唯一权威); 连2轮slight触HL-4 break	paired
+2026-10-18T19:32	ghost-298ce5f	SaltyGoose	83.7	86.0	final	-	版本收口 3.0.2: 3轮中保留1轮/回滚2轮, 子agent实测6次(0 dry_run), paired judge 9次	-
+2026-10-18T20:30	ghost-6ea00db	SaltyGoose	86.0	90.9	baseline	-	基线评估(3.0.3): 结构评分主agent + dim8 3prompt子agent独立盲测全full_test; 短板 dim6(exec-card概念锚悬空)/dim5(段落60vs50+伏笔80vs60阈值冲突)	full_test
+2026-10-18T20:40	ghost-63a5c08	SaltyGoose	(after baseline)	3-0 better	keep	dim5	F3/R1 硬门触发点 50/60→60/80 删警示带: 名实相符(AT-63/22+mss-rules+quality-gate 四处一致), 金标准 MSS83.0 不误杀/坏样例仍 exit3/回归+一键门全过, 3 judge 全 better 全 high	paired
+2026-10-18T20:50	ghost-0207c47	SaltyGoose	(after R1)	3-0 better	keep	dim6	exec-card 概念锚→可校验路径引用(2处): 指路可达+死链门禁可管(245条全通), CHANGELOG 4处史实保留, 回归 exit 0, 3 judge 全 better 全 high	paired
+2026-10-18T21:05	ghost-8527808	SaltyGoose	90.9	-	final	-	版本收口 3.0.4: 2轮 paired 全 keep(3-0 better×2, 0 dry_run), 缺陷1/2/5已修, 缺陷3/4待用户裁决, 自检三件套全绿	-
+2026-10-18T22:05	bak-3.0.4-20261018	SaltyGoose	90.9	-	baseline	-	3.0.5 轮基线：Phase 0.4 普查 64 对象（51 合格+8 缺陷+5 不适用），短板 dim5（AT-36 双阈/AT-14 假双线）、dim3（hits/problems 语义分裂）、dim6（tsv 假 hash）	full_test
+2026-10-18T22:12	bak-3.0.4-20261018	SaltyGoose	(after baseline)	3-0 better	keep	dim5	AT-36 消歧：五处统一「逐词 ≤2」（与 check-ai 实现一致）+ 删数学不可达总量线≤10 + check-metrics 注明 8 词池合计口径；3 judge 全 better（2 clear/1 slight），judge 指出 check-metrics 第9项遗漏已当场补	paired
+2026-10-18T22:24	bak-3.0.4-20261018	SaltyGoose	(after R1)	3-0 better	keep	dim5	AT-14 假双线→单一硬线 ≥90%（10 处对齐 check-artifacts 实际行为）+ check-consistency 8 条反向断言锁双线回流（实测故意改回即报错）；首评 1 worse（漏 stage6:114）→ 补改复评 3-0 better	paired
+2026-10-18T22:34	bak-3.0.4-20261018	SaltyGoose	(after R2)	3-0 better	keep	dim3	check-ai 引入 within_thresh：阈内命中单列汇总「ℹ️ 阈内待人工定级 N 词」，消掉「有⚠️却 exit 0」的模糊地带；docstring 补三档输出口径；门禁行为未变（超阈仍 exit 2）	paired
+2026-10-18T22:40	bak-3.0.4-20261018	SaltyGoose	(after R3)	-（无 judge，纯记录修正）	keep	dim6	results.tsv anchor 列口径重定义：非 git 环境用备份目录锚点，历史假 hash 加 ghost- 前缀标明不可复核（史实保留）	-
+2026-10-18T22:55	bak-3.0.5-20261018	SaltyGoose	90.9	-	baseline	-	3.0.6 轮基线：阶段 1 专项普查（模板/门/自查/规则/样例/脚本断言六处），核心缺陷=空白度字段写了但质量门没门、命题路线与必填表矛盾	专项审计
+2026-10-18T22:58	bak-3.0.5-20261018	SaltyGoose	-（建议 1）	-	keep	dim4	空白度门 5b 落地：quality-gate.md 10 条门→11 条（5b 四维档位/红海即门不过）+ 不过处置补「偏移四法救活→重验三关→仍红海弃题」；直连 AT-46 红线	paired
+2026-10-18T23:02	bak-3.0.5-20261018	SaltyGoose	-（建议 2）	-	keep	dim2	命题路线矛盾消除：workflow 第一节改双路线表；模板第 2 节插路线条件化块——命题路线降为一行说明，但候选卡热点依据卡任何路线不得省略	paired
+2026-10-18T23:06	bak-3.0.5-20261018	SaltyGoose	-（建议 3）	-	keep	dim5	九维 S/A 可验证化：折算表加第 4 列「可验证动作」（S=≥2 本对标+超出维度；A=≥1 本+具体差异句；B=无证据缺省档），同步 rules.md 编造防线 #4 与门 3 判据	paired
+2026-10-18T23:10	bak-3.0.5-20261018	SaltyGoose	-（建议 4）	-	keep	dim4	阶段 1 产物结构门禁：check-consistency 新增 6 组断言（模板六节齐/空白度字段/路线条件化/门含5b/自查含空白度/红线判据指正本），断言总数 187→193；有效性实测（删 5b 行即报错→还原全绿）	paired
+2026-10-18T23:14	bak-3.0.5-20261018	SaltyGoose	-（建议 5）	-	keep	dim8	官方样例补三候选：00-选题评估.md 整体重写为 A/B/C 对照表（空白度档位+差异化切口+双打分三维/九维/≥2A+红线行），README 描述同步；rules.md 新增空白度纪律章节（含「空白度≠结构指纹」），产物纪律顺延为五	paired
+2026-10-18T23:18	bak-3.0.5-20261018	SaltyGoose	90.9	-	final	-	版本收口 3.0.6：建议 1-5 全改完，断言 193 组 + 死链 254 条全通，自检双件与端到端全绿；建议 6（54 格红线矩阵）/建议 7 明确留待下一轮	-
+2026-10-18T23:30	bak-3.0.5-20261018	SaltyGoose	90.9	-	baseline	-	3.0.7 轮基线：3.0.6 遗留建议 6/7 + 自查全库同步漏改	专项审计
+2026-10-18T23:34	bak-3.0.5-20261018	SaltyGoose	-（建议 6）	-	keep	dim8	红线矩阵 54 格落地：样例第5节由「三候选均零命中」一句话展开为 18×3=54 格实填（行=18项红线/列=3候选/判定要点列），候选B第17项判⚠️待核并给拒绝+替代处置示范；模板明确矩阵格式与「零命中也须逐格打勾」+三态口径；self-check 红线段 2 问扩 3 问；SKILL 执行卡/README 同步	paired
+2026-10-18T23:38	bak-3.0.5-20261018	SaltyGoose	-（建议 7①）	-	keep	dim7	补 3.0.6 自漏：references/README.md 门总览行补「空白度四维已搜且非红海」+红线54格口径——该文件是全库 10 个提及空白度文件里唯一 0 次提及者	paired
+2026-10-18T23:40	bak-3.0.5-20261018	SaltyGoose	-（建议 7②）	-	keep	dim7	quality-gate.md:26 裸文件名 compliance-redlines.md → `../../assets/compliance-redlines.md`（裸名无反引号，死链检查只扫反引号路径故一直漏网）	paired
+2026-10-18T23:44	bak-3.0.5-20261018	SaltyGoose	-（断言加固）	-	keep	dim4	新增 7 组断言（193→200）：模板54格/样例54格(含反向断言禁一句话回流)/门7正本路径/门总览含空白度/SKILL门表含空白度/自查54格/禁裸名引用；三条关键断言均实测退化→报错→还原复测全绿	paired
+2026-10-18T23:48	bak-3.0.5-20261018	SaltyGoose	90.9	-	final	-	版本收口 3.0.7：建议 6/7 全做完，断言 200 组 + 死链 256 条全通，自检三件套全绿	-
+2026-10-18T23:55	bak-3.0.7-20261018	SaltyGoose	90.9	-	baseline	-	3.0.8 轮基线：阶段 2 梗概专项审计（workflow/gate/self-check/rules/模板/样例/stage3 承接/stage6 P1/AT 表），查出 6 处	专项审计
+2026-10-18T23:58	bak-3.0.7-20261018	SaltyGoose	-（建议1）	-	keep	dim5	靶点口径统一：AT-33 补折算（密度≥15/万字×1.2-1.6万字=总数18-24、虐文22-29），明文「密度是判罚权威/总数是书写形式，须标篇幅带」，旧「总数≥15」标已废止禁回流；样例 6→20(1.35万字折算14.8)；同步stage3/template02/prompts	paired
+2026-10-19T00:02	bak-3.0.7-20261018	SaltyGoose	-（建议2）	-	keep	dim2	八字段→九字段正本统一：以模板为事实正本补「目标读者与情绪承诺」「核心冲突」两项（原有门条目在管却不在字段清单）；workflow 第二节改为引正本只讲做法；全库20处表述同步；AT-73「不另立第九字段」加注其约束对象是主疼位非字段总数	paired
+2026-10-19T00:06	bak-3.0.7-20261018	SaltyGoose	-（建议3）	-	keep	dim7	阶段3承接核对由5项补为九项逐项对照（每项写明落到细纲何处），修「悬念三要素可整项丢失而不被发现」；同步templates/02-outline、stage3 self-check、stage6 P1-27	paired
+2026-10-19T00:09	bak-3.0.7-20261018	SaltyGoose	-（建议4）	-	keep	dim5	补 AT-81 压迫递进四层（单层3000-4000字、须强度递增非并列），消解「四处都在查却无编号可引」的悬空；模板/quality-gate/rules/self-check/stage6 P1 五处改为引 AT-81；AT 表无脚本附注补入	paired
+2026-10-19T00:12	bak-3.0.7-20261018	SaltyGoose	-（建议5）	-	keep	dim4	门10/门11合并为「暂定标题合规+兑现预演」（同管字段9两维度），空出门11改为「情绪承诺有落地字段」补字段2无人管缺口；stage6 P1 仍13项、全局1-46连续	paired
+2026-10-19T00:16	bak-3.0.7-20261018	SaltyGoose	-（建议6）	-	keep	dim4	阶段2 新增13组结构断言（200→213），含2条反向断言（禁八字段回流/禁样例靶点退回6）；样例补齐为真九字段	paired
+2026-10-19T00:20	bak-3.0.7-20261018	SaltyGoose	90.9	-	final	-	版本收口 3.0.8：建议1-6全改完，断言213组+死链260条全通，三件套全绿；关键发现=朴素"文件含该词"断言会被脚注同名词蒙混通过，已改行首锚精确匹配	-
+2026-10-19T00:05	bak-3.0.8-20261018	SaltyGoose	90.9	-	baseline	-	3.0.9 轮基线：阶段 3 细纲专项审计（workflow/gate/self-check/rules/模板/样例/stage6 P1/AT 表/check-artifacts 机检实测），查出 8 处	专项审计
+2026-10-19T00:10	bak-3.0.8-20261018	SaltyGoose	-（建议1）	-	keep	dim4	修机检硬门恒过失效（P0）：table_rows 新增 exact_col/exclude_lead，顺序=先剔除节拍表再两轮精配（恰等→前缀），加 cov>100% 兜底告警；F/C/A 三调用点全改。实测旧代码精确重现「覆盖率200%」，修复后靶点行3→6、200%→100%	paired
+2026-10-19T00:14	bak-3.0.8-20261018	SaltyGoose	-（建议2）	-	keep	dim7	节拍表列数统一为九列（P0）：以 workflow 3.2 为正本，门1+P1-20 改「九列在位」并列全列名；样例补「信息投喂（AT-21）」「伏笔动作」两列——信息投喂列是 AT-21 的载体，此前样例完全没有排布位置	paired
+2026-10-19T00:18	bak-3.0.8-20261018	SaltyGoose	-（建议3）	-	keep	dim4	门10 补有人查（P0）：stage6 P1 新增第32项「伏笔地图与上篇双向一致」，P1 46→47、AT-54 与全库12处「76项」同步 77 项；样例伏笔地图改为与上篇同编号 V1/V2/V3（原为 1/2/3≠上篇，正是门10 要防的情形）并补三列信息差	paired
+2026-10-19T00:22	bak-3.0.8-20261018	SaltyGoose	-（建议4）	-	keep	dim7	门9 补 AT-43 记忆点显影位（前500字）——AT 标注「细纲+正文双查」但门只管三件套+动机+命名；同步 P1-21	paired
+2026-10-19T00:25	bak-3.0.8-20261018	SaltyGoose	-（建议5）	-	keep	dim5	AT-72 入阶段3（此前 stage3 零提及，只能等终审被打回）：workflow 增闭环章数上限纪律、门6 改名含AT-72、self-check 第2问加闭环计数	paired
+2026-10-19T00:28	bak-3.0.8-20261018	SaltyGoose	-（建议6）	-	keep	dim8	self-check 机检口径纠偏：check-length.py 输入是正文，阶段3 调用实测必 exit=3（980字→❌篇幅带），原文档却写「通过条件 exit 0」；改为「本阶段无可用脚本，全走人工算术」+ 降级口径改「常态非降级」	paired
+2026-10-19T00:31	bak-3.0.8-20261018	SaltyGoose	-（建议7）	-	keep	dim7	删 templates/02-outline.md「对不上先改细纲」重复句（3.0.8 批量替换残留）+ 加反向断言	paired
+2026-10-19T00:35	bak-3.0.8-20261018	SaltyGoose	-（建议8）	-	keep	dim8	样例补齐六张预埋表（原仅伏笔规划表1张，正是机检缺陷长期不可见的原因），靶点表头改「靶点编号」确保首列不含「章」+ 迷你演示折算声明；连带修 C4 豁免表补5词（折算说明常写在续行，单行匹配不到稳定误报）	paired
+2026-10-19T00:40	bak-3.0.8-20261018	SaltyGoose	-（断言加固）	-	keep	dim4	新增 17 组断言（213→230），含 4 条反向断言；8 项退化实测全部按预期报错后还原复测，其中「还原旧 table_rows 精确重现 200%」是关键证据	paired
+2026-10-19T00:44	bak-3.0.8-20261018	SaltyGoose	90.9	-	final	-	版本收口 3.0.9：建议1-8全改完，断言230组+死链262条全通，三件套全绿；核心成果=修掉一条在任何含节拍表细纲上恒过失效的❌级硬门	-
